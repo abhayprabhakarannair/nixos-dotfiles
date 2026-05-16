@@ -6,24 +6,23 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    awww.url = "git+https://codeberg.org/LGFae/awww";
   };
 
-  outputs = { self, nixpkgs, home-manager, awww, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
   let
-    # Helper to avoid boilerplate for every host configuration
     mkSystem = hostName: nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
       specialArgs = { inherit inputs; };
 
       modules = [
-        ./hosts/${hostName} # Automatically resolves to ./hosts/<name>/default.nix
+        ./hosts/${hostName}
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
+	    extraSpecialArgs = { inherit inputs; };
             users.abhay = import ./users/abhay/home.nix;
             backupFileExtension = "backup";
           };
@@ -33,10 +32,6 @@
   in {
     nixosConfigurations = {
       daredevil   = mkSystem "daredevil";
-      #devil       = mkSystem "devil";
-      #homelab-one = mkSystem "homelab-one";
-      #homelab-two = mkSystem "homelab-two";
-      #old-devil   = mkSystem "old-devil";
     };
   };
 } 

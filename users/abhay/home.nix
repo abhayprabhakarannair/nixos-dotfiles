@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
+
+  imports = [
+  ];
+
   home.username = "abhay";
   home.homeDirectory = "/home/abhay";
   home.stateVersion = "25.11";
@@ -16,27 +20,6 @@
 	  };
   };
 
-  programs.foot = {
-	  enable = true;
-	  settings = {
-		  main = {
-			  term = "xterm-256color";
-			  font = "JetBrainsMono Nerd Font:size=11";
-			  dpi-aware = "yes";
-		  };
-		  mouse = {
-			  hide-when-typing = "yes";
-		  };
-		  colors = {
-			  alpha = "0.95"; # Easy transparency tweak
-		  };
-		  scrollback = {
-			  lines = 100000;
-		  };
-	  };
-  };
-
-
   programs.bash = {
     enable = true;
     shellAliases = {
@@ -45,6 +28,7 @@
   };
 
   home.sessionVariables = {
+     SSH_AUTH_SOCK = "${config.home.homeDirectory}/.repository-vault-auth.sock";
   };
 
   services.ssh-agent.enable = true;
@@ -62,6 +46,5 @@
   };
 
   # Symlinks config (Better for non nix configs)
-  xdg.configFile."niri".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/niri";
-  xdg.configFile."waybar".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/waybar";
+  # xdg.configFile."niri".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/niri";
 }

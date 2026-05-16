@@ -1,7 +1,6 @@
 { pkgs, ... }: {
 
   boot = {
-    # 1. Silencing the Kernel logs
     kernelParams = [
       "quiet"           # Tells the kernel to shut up about normal logs
       "splash"          # Enables splash screens
@@ -12,24 +11,19 @@
       "udev.log_priority=3"
     ];
 
-    # 2. Hide console messages during boot sequence stages
     consoleLogLevel = 0;
     initrd.verbose = false;
 
-    # 3. Enable Plymouth Boot Splash
     plymouth = {
       enable = true;
-      # Choose a theme. "breeze" comes default, or "spinner" is a clean modern circle loader.
       theme = "spinner"; 
     };
   };
 
-
-  services.displayManager.ly.settings = {
-	  clear_tty = true;
-	  animation = "matrix"; # Optional: Ly has a neat built-in fire or matrix animation if you like!
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
   };
+  services.desktopManager.plasma6.enable = true;
 
-  # Brightness
-  hardware.brillo.enable = true;
 }

@@ -5,7 +5,6 @@
     [
       /etc/nixos/hardware-configuration.nix
       ../../modules/common.nix
-      ../../modules/compositors/niri.nix 
       ../../modules/desktop.nix
       ../../modules/desktop-apps.nix
       ../../users/abhay/system.nix

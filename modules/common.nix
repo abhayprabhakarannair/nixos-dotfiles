@@ -2,7 +2,6 @@
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
   
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   services.openssh.enable = true;
 
   # Allow any unfree package across the entire fleet
@@ -11,4 +10,22 @@
   environment.systemPackages = with pkgs; [
     vim wget git tree pfetch
   ];
+
+  nix = {
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+  };
+
+  # 3. Centralized log constraints
+  services.journald.extraConfig = ''
+    SystemMaxUse=1G
+    SystemMaxFileSize=200M
+  '';
 }
