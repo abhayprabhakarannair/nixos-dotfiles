@@ -24,11 +24,12 @@
     enable = true;
     shellAliases = {
       ll = "ls -larth";
+      nrs = "sudo nixos-rebuild switch --impure --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
     };
   };
 
   home.sessionVariables = {
-     SSH_AUTH_SOCK = "${config.home.homeDirectory}/.repository-vault-auth.sock";
+     SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
   };
 
   services.ssh-agent.enable = true;
