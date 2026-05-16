@@ -11,5 +11,7 @@
     bitwarden-desktop
     vlc
     kdePackages.kcalc
+    kdePackages.plasma-browser-integration
   ];
+
 }

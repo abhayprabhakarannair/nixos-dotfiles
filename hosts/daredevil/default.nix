@@ -7,6 +7,7 @@
       ../../modules/common.nix
       ../../modules/desktop.nix
       ../../modules/desktop-apps.nix
+      ../../modules/virtualisation.nix
       ../../users/abhay/system.nix
     ];
 

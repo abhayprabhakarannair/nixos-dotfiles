@@ -48,4 +48,6 @@
 
   # Symlinks config (Better for non nix configs)
   # xdg.configFile."niri".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-dotfiles/config/niri";
+  home.file.".config/vivaldi/NativeMessagingHosts/org.kde.plasma.browser_integration.json".source =
+  "${pkgs.kdePackages.plasma-browser-integration}/etc/chromium/native-messaging-hosts/org.kde.plasma.browser_integration.json";
 }
