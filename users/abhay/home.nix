@@ -20,24 +20,37 @@
 	  };
   };
 
-  programs.bash = {
+
+programs.zsh = {
     enable = true;
-    shellAliases = {
-      ll = "ls -larth";
-      nrs = "sudo nixos-rebuild switch --impure --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
+    enableCompletion = true;
+    autosuggestion = {enable = true;};
+    syntaxHighlighting = {enable = true;};
+    history = {
+	    size = 10000;
+	    path = "$HOME/.zsh_history";
+	    ignoreAllDups = true;
     };
-  };
 
-  home.sessionVariables = {
-     SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
-  };
+    shellAliases = {
+	    ll = "ls -larth";
+	    nrs = "sudo nixos-rebuild switch --impure --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
+    };
 
-  services.ssh-agent.enable = true;
+    sessionVariables = {
+	    EDITOR="nvim";
+	    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
+    };
 
-  programs.ssh = {
-    enable = true;
-    enableDefaultConfig = false;
-    matchBlocks = {
+};
+
+
+services.ssh-agent.enable = true;
+
+programs.ssh = {
+	enable = true;
+	enableDefaultConfig = false;
+	matchBlocks = {
       "github.com" = {
         hostname = "github.com";
         user = "git";

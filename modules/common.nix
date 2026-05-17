@@ -28,4 +28,9 @@
     SystemMaxUse=1G
     SystemMaxFileSize=200M
   '';
+
+
+  programs.zsh.enable = true;
+
+  users.defaultUserShell = pkgs.zsh;
 }
