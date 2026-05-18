@@ -12,6 +12,7 @@
     vlc
     kdePackages.kcalc
     kdePackages.plasma-browser-integration
+    kdePackages.sddm-kcm
   ])
   ++
   (with pkgs-unstable; [
