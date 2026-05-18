@@ -3,8 +3,8 @@
 {
   imports =
     [
-      ./hardware-configuration.nix
-      ./disko.nix
+      /etc/nixos/hardware-configuration.nix
+      ./disko-config.nix
       ../../modules/common.nix
       ../../modules/desktop.nix
       ../../modules/desktop-apps.nix

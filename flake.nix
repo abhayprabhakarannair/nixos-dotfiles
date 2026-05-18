@@ -13,7 +13,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, disko, home-manager, ... }@inputs: 
   let
     system = "x86_64-linux";
     pkgs-unstable = import nixpkgs-unstable {
@@ -27,7 +27,7 @@
       specialArgs = { inherit inputs pkgs-unstable; };
 
       modules = [
-        disko.nixModules.disko
+        disko.nixosModules.disko
         ./hosts/${hostName}
         home-manager.nixosModules.home-manager
         {
