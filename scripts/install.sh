@@ -15,10 +15,14 @@ echo "========================================"
 
 echo
 echo "[1/6] Formatting and mounting disks..."
-sudo nix --experimental-features "nix-command flakes" \
+echo -n "Enter LUKES passphrase: "
+read -s LUKS_PASSWORD
+echo ""
+
+sudo password="$LUKS_PASSWORD" nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
   --mode destroy,format,mount \
-  "./$DOTNAME/hosts/$HOSTNAME/disk-config.nix"
+  "/home/nixos/$DOTNAME/hosts/$HOSTNAME/disko-config.nix"
 
 echo
 echo "[2/6] Cloning dotfiles..."
@@ -33,12 +37,12 @@ sudo nixos-generate-config \
 
 echo
 echo "[4/6] Cleaning generated configuration.nix..."
-rm -f "$DOTFILES/configuration.nix"
+rm -f "$DOTFILES/hosts/$HOSTNAME/configuration.nix"
 
 echo
 echo "[5/6] Installing NixOS..."
-sudo nixos-install \
-  --flake "$DOTFILES#$HOSTNAME"
+cd "$DOTFILES"
+sudo nixos-install --flake ".#$HOSTNAME"
 
 echo
 echo "[6/6] Setting password for user: abhay"
