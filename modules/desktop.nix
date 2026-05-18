@@ -26,10 +26,8 @@
   };
   services.desktopManager.plasma6.enable = true;
 
-  # Enable finger print system wide, but disable for SDDM (its buggy)
-  services.fprintd.enable = true;
-  security.pam.services.login.fprintAuth = false;
-  security.pam.services.kde.fprintAuth = pkgs.lib.mkForce true;
-
   services.fwupd.enable = true;
+
+  hardware.enableAllFirmware = true;
+  hardware.cpu.amd.updateMicrocode = true;
 }
