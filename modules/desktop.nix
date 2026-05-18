@@ -1,13 +1,25 @@
-{ pkgs, ... }: {
+{ config, pkgs, lib, ... }:
 
+let
+  background-package = pkgs.stdenvNoCC.mkDerivation {
+    name = "custom-wallpaper";
+    src = ../assets/wallpaper.jpg;
+    dontUnpack = true;
+    installPhase = ''
+      mkdir -p $out
+      cp $src $out/background.jpg
+    '';
+  };
+in
+{
   boot = {
     kernelParams = [
-      "quiet"           # Tells the kernel to shut up about normal logs
-      "splash"          # Enables splash screens
-      "boot.shell_on_fail" # Drops to shell if boot fails, so you aren't completely blind if things break
-      "loglevel=3"      # Only show errors, hide warnings/info
-      "rd.systemd.show_status=false" # Hide systemd service startup messages in initrd
-      "rd.udev.log_level=3"          # Hide hardware probe warnings
+      "quiet"
+      "splash"
+      "boot.shell_on_fail"
+      "loglevel=3"
+      "rd.systemd.show_status=false"
+      "rd.udev.log_level=3"
       "udev.log_priority=3"
     ];
 
@@ -21,12 +33,19 @@
   };
 
   services.displayManager.sddm = {
-    enable = true;
+    enable = lib.mkDefault true;
+    theme = "breeze";
     wayland.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    (pkgs.writeTextDir "share/sddm/themes/breeze/theme.conf.user" ''
+      [General]
+      background = "${background-package}/background.jpg"
+    '')
+  ];
+
   services.desktopManager.plasma6.enable = true;
-
   services.fwupd.enable = true;
-
   hardware.enableAllFirmware = true;
 }

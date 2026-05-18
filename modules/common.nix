@@ -8,7 +8,7 @@
   nixpkgs.config.allowUnfree = true;
   
   environment.systemPackages = with pkgs; [
-    vim wget git tree pfetch curl
+    vim wget git tree fastfetch curl
   ];
 
   nix = {
