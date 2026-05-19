@@ -1,17 +1,19 @@
-{ config, pkgs, lib, ... }:
-
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}: let
   background-package = pkgs.stdenvNoCC.mkDerivation {
     name = "custom-wallpaper";
-    src = ../assets/wallpaper.jpg;
+    src = ../../assets/wallpaper.jpg;
     dontUnpack = true;
     installPhase = ''
       mkdir -p $out
       cp $src $out/background.jpg
     '';
   };
-in
-{
+in {
   boot = {
     kernelParams = [
       "quiet"
@@ -28,7 +30,7 @@ in
 
     plymouth = {
       enable = true;
-      theme = "spinner"; 
+      theme = "spinner";
     };
   };
 

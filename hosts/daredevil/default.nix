@@ -1,17 +1,19 @@
-{ config, lib, pkgs, ... }:
-
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ./disko-config.nix
-      ../../modules/common.nix
-      ../../modules/desktop.nix
-      ../../modules/desktop-apps.nix
-      ../../modules/virtualisation.nix
-      ../../config/nvf
-      ../../users/abhay/system.nix
-    ];
+  config,
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./hardware-configuration.nix
+    ./disko-config.nix
+    ../../modules/common.nix
+    ../../modules/desktop
+    ../../modules/desktop/apps.nix
+    ../../modules/virtualisation.nix
+    ../../modules/nvf
+    ../../users/abhay/system.nix
+  ];
 
   networking.hostName = "daredevil";
   networking.networkmanager.enable = true;
@@ -21,21 +23,20 @@
 
   boot.initrd.systemd.enable = true;
 
-  boot.initrd.availableKernelModules = [ "tpm_tis" ];
-  boot.kernelParams = [ "amd_pstate=active" ];
- 
-  boot.initrd.luks.devices."enc".crypttabExtraOpts = [ "tpm2-device=auto" ];
+  boot.initrd.availableKernelModules = ["tpm_tis"];
+  boot.kernelParams = ["amd_pstate=active"];
+
+  boot.initrd.luks.devices."enc".crypttabExtraOpts = ["tpm2-device=auto"];
   boot.kernelPackages = pkgs.linuxPackages_zen;
 
-
-  swapDevices = [ { device = "/swap/swapfile"; } ];
+  swapDevices = [{device = "/swap/swapfile";}];
 
   services.libinput.enable = true;
 
   services.btrfs.autoScrub = {
-   enable = true;
-   interval = "weekly"; 
-};
+    enable = true;
+    interval = "weekly";
+  };
 
   # Enable finger print system wide, but disable for SDDM (its buggy)
   services.fprintd.enable = true;
@@ -44,4 +45,3 @@
 
   system.stateVersion = "25.11";
 }
-

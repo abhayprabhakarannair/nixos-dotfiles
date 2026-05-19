@@ -1,20 +1,25 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   time.timeZone = "Asia/Kolkata";
   i18n.defaultLocale = "en_US.UTF-8";
-  
+
   services.openssh.enable = true;
 
   # Allow any unfree package across the entire fleet
   nixpkgs.config.allowUnfree = true;
-  
+
   environment.systemPackages = with pkgs; [
-    vim wget git tree fastfetch curl
+    vim
+    wget
+    git
+    tree
+    fastfetch
+    curl
   ];
 
   nix = {
     settings = {
       auto-optimise-store = true;
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = ["nix-command" "flakes"];
     };
     gc = {
       automatic = true;
@@ -28,7 +33,6 @@
     SystemMaxUse=1G
     SystemMaxFileSize=200M
   '';
-
 
   programs.zsh.enable = true;
 

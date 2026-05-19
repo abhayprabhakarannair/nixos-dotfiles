@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-{
-   
+{pkgs, ...}: {
   virtualisation.containers.enable = true;
   virtualisation = {
     podman = {
@@ -12,5 +10,4 @@
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
-
 }

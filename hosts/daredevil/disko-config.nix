@@ -14,7 +14,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "fmask=0022" "dmask=0022" ];
+                mountOptions = ["fmask=0022" "dmask=0022"];
               };
             };
             luks = {
@@ -22,26 +22,26 @@
               content = {
                 type = "luks";
                 name = "enc";
-                extraOpenArgs = [ "--allow-discards" ];
+                extraOpenArgs = ["--allow-discards"];
                 content = {
                   type = "btrfs";
-                  extraArgs = [ "-f" ];
+                  extraArgs = ["-f"];
                   subvolumes = {
                     "@" = {
                       mountpoint = "/";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = ["compress=zstd" "noatime"];
                     };
                     "@home" = {
                       mountpoint = "/home";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = ["compress=zstd" "noatime"];
                     };
                     "@nix" = {
                       mountpoint = "/nix";
-                      mountOptions = [ "compress=zstd" "noatime" ];
+                      mountOptions = ["compress=zstd" "noatime"];
                     };
                     "@swap" = {
                       mountpoint = "/swap";
-                      mountOptions = [ "noatime" ];
+                      mountOptions = ["noatime"];
                       swap.swapfile.size = "32G";
                     };
                   };

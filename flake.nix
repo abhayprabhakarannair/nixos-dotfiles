@@ -17,39 +17,47 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, disko, home-manager, nvf, ... }@inputs: 
-  let
+  outputs = {
+    self,
+    nixpkgs,
+    nixpkgs-unstable,
+    disko,
+    home-manager,
+    nvf,
+    ...
+  } @ inputs: let
     system = "x86_64-linux";
     pkgs-unstable = import nixpkgs-unstable {
-         inherit system;
-         config.allowUnfree = true;
-    };
-
-    mkSystem = hostName: nixpkgs.lib.nixosSystem {
       inherit system;
-
-      specialArgs = { inherit inputs pkgs-unstable; };
-
-      modules = [
-        disko.nixosModules.disko
-	nvf.nixosModules.default
-        ./hosts/${hostName}
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-	    extraSpecialArgs = { inherit inputs pkgs-unstable; };
-            users.abhay = import ./users/abhay/home.nix;
-            backupFileExtension = "backup";
-          };
-        }
-      ];
+      config.allowUnfree = true;
     };
+
+    mkSystem = hostName:
+      nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = {inherit inputs pkgs-unstable;};
+
+        modules = [
+          disko.nixosModules.disko
+          nvf.nixosModules.default
+          ./hosts/${hostName}
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit inputs pkgs-unstable;};
+              users.abhay = import ./users/abhay/home.nix;
+              backupFileExtension = "backup";
+            };
+          }
+        ];
+      };
   in {
     nixosConfigurations = {
-      daredevil   = mkSystem "daredevil";
-      devil   = mkSystem "devil";
+      daredevil = mkSystem "daredevil";
+      devil = mkSystem "devil";
     };
   };
-} 
+}

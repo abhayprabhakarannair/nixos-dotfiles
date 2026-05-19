@@ -1,6 +1,6 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   users.users.abhay = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" "linger" "libvirtd" ];
+    extraGroups = ["wheel" "networkmanager" "video" "linger" "libvirtd"];
   };
 }

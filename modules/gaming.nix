@@ -1,21 +1,24 @@
-{ pkgs, pkgs-unstable, ... }: {
-
+{
+  pkgs,
+  pkgs-unstable,
+  ...
+}: {
   programs.steam = {
     enable = true;
     package = pkgs-unstable.steam;
-    
+
     gamescopeSession = {
       enable = true;
       package = pkgs-unstable.gamescope;
     };
-    
+
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
   };
 
   environment.systemPackages = [
-    pkgs-unstable.protonup-qt       
-    
+    pkgs-unstable.protonup-qt
+
     pkgs-unstable.mangohud
     pkgs-unstable.goverlay
   ];
