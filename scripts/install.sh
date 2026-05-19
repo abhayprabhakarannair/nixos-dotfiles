@@ -19,9 +19,9 @@ echo -n "Enter LUKES passphrase: "
 read -s LUKS_PASSWORD
 echo ""
 sudo password="$LUKS_PASSWORD" nix --experimental-features "nix-command flakes" \
-  run github:nix-community/disko/latest -- \
-  --mode destroy,format,mount \
-  "/home/nixos/$DOTNAME/hosts/$HOSTNAME/disko-config.nix"
+        run github:nix-community/disko/latest -- \
+        --mode destroy,format,mount \
+        "/home/nixos/$DOTNAME/hosts/$HOSTNAME/disko-config.nix"
 
 echo
 echo "[2/6] Cloning dotfiles..."
@@ -30,9 +30,9 @@ git clone "$REPO" "$DOTFILES"
 echo
 echo "[3/6] Generating hardware configuration..."
 sudo nixos-generate-config \
-  --no-filesystems \
-  --root /mnt \
-  --dir "$DOTFILES/hosts/$HOSTNAME"
+        --no-filesystems \
+        --root /mnt \
+        --dir "$DOTFILES/hosts/$HOSTNAME"
 
 echo
 echo "[4/6] Cleaning generated configuration.nix..."
