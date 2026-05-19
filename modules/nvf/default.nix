@@ -12,5 +12,6 @@
     ./spellcheck.nix
     ./undo.nix
     ./clipboard.nix
+    ./mini.nix
   ];
 }
