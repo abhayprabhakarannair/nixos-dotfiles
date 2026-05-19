@@ -15,7 +15,7 @@
   ])
   ++
   (with pkgs-unstable; [
-    neovim
+#    neovim
   ]);
 
 }

@@ -9,6 +9,7 @@
       ../../modules/desktop.nix
       ../../modules/desktop-apps.nix
       ../../modules/virtualisation.nix
+      ../../config/nvf
       ../../users/abhay/system.nix
     ];
 
