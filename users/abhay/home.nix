@@ -39,6 +39,7 @@
       ll = "ls -larth";
       nrs = "sudo nixos-rebuild switch --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
       nrb = "sudo nixos-rebuild boot --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
+      ve = "nvim .";
     };
 
     sessionVariables = {
