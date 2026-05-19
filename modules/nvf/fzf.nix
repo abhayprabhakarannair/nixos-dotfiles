@@ -30,6 +30,10 @@
       action = "<cmd>FzfLua diagnostics_document<cr>";
       desc = "[S]earch [D]iagnostics";
     };
+    "<leader>sD" = {
+      action = "<cmd>FzfLua diagnostics_workspace<cr>";
+      desc = "[S]earch [D]iagnostics (Workspace)";
+    };
     "<leader>s." = {
       action = "<cmd>FzfLua oldfiles<cr>";
       desc = "[S]earch Recent Files (\".\" for repeat)";
