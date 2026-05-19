@@ -40,7 +40,7 @@ rm -f "$DOTFILES/hosts/$HOSTNAME/configuration.nix"
 
 echo
 echo "[5/6] Installing NixOS..."
-sudo cd "$DOTFILES"
+cd "$DOTFILES"
 sudo nixos-install --flake ".#$HOSTNAME"
 
 echo
