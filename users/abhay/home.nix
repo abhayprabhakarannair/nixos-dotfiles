@@ -34,8 +34,8 @@ programs.zsh = {
 
     shellAliases = {
 	    ll = "ls -larth";
-	    nrs = "sudo nixos-rebuild switch --flake /var/lib/nixos-dotfiles#\$(cat /etc/hostname)";
-	    nrb = "sudo nixos-rebuild boot --flake /var/lib/nixos-dotfiles#\$(cat /etc/hostname)";
+	    nrs = "sudo nixos-rebuild switch --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
+	    nrb = "sudo nixos-rebuild boot --flake /etc/nixos/nixos-dotfiles#\$(cat /etc/hostname)";
     };
 
     sessionVariables = {

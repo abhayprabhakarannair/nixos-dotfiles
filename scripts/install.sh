@@ -6,7 +6,7 @@ HOSTNAME="${1:?usage: ./install.sh <hostname>}"
 
 DOTNAME="nixos-dotfiles"
 REPO="https://github.com/abhayprabhakarannair/$DOTNAME"
-DOTFILES="/mnt/var/lib/$DOTNAME"
+DOTFILES="/mnt/etc/nixos/$DOTNAME"
 
 echo "========================================"
 echo " Starting NixOS installation"
@@ -18,7 +18,6 @@ echo "[1/6] Formatting and mounting disks..."
 echo -n "Enter LUKES passphrase: "
 read -s LUKS_PASSWORD
 echo ""
-
 sudo password="$LUKS_PASSWORD" nix --experimental-features "nix-command flakes" \
   run github:nix-community/disko/latest -- \
   --mode destroy,format,mount \
