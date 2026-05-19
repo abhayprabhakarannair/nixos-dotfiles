@@ -12,3 +12,5 @@ LUKS_PARTITION="/dev/nvme0n1p2"
 
 sudo systemd-cryptenroll --tpm2-device=auto --tpm2-pcrs=0+7 "$LUKS_PARTITION"
 sudo chown -R abhay:users "$DOTFILES"
+cd "$DOTFILES"
+git remote set-url origin git@github.com:abhayprabhakarannair/nixos-dotfiles
